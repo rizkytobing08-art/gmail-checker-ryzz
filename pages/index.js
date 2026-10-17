@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import QrisRyzz from '../components/QrisRyzz'
 
 export default function Home(){
   const [email, setEmail] = useState('')
@@ -19,7 +20,6 @@ export default function Home(){
   return (
     <div className="min-h-screen bg-[#0a0a0f] flex justify-center p-4">
       <div className="w-full max-w-[380px]">
-        {/* Header kayak di video */}
         <div className="bg-[#16161f] border border-violet-900/50 rounded-2xl p-4 flex justify-between items-center">
           <div>
             <h1 className="font-black text-violet-400">RYZZ CHECKER</h1>
@@ -28,44 +28,27 @@ export default function Home(){
           <a href="/deposit" className="bg-violet-600 px-3 py-1.5 rounded-full text-xs font-bold">DEPOSIT 2RB</a>
         </div>
 
-        {/* Card Cek */}
         <div className="bg-[#16161f] border border-gray-800 rounded-2xl p-5 mt-4">
           <label className="text-xs text-gray-400">EMAIL AKUN MU (SALDO)</label>
-          <input value={userEmail} onChange={e=>setUserEmail(e.target.value)} placeholder="ryzz@gmail.com" className="w-full mt-1 p-3 rounded-xl bg-[#0f0f14] border border-gray-800 text-sm focus:border-violet-600 outline-none"/>
-          
+          <input value={userEmail} onChange={e=>setUserEmail(e.target.value)} placeholder="ryzz@gmail.com" className="w-full mt-1 p-3 rounded-xl bg-[#0f0f14] border border-gray-800 text-sm"/>
           <label className="text-xs text-gray-400 mt-4 block">TARGET GMAIL</label>
-          <input value={email} onChange={e=>setEmail(e.target.value)} placeholder="target@gmail.com" className="w-full mt-1 p-3 rounded-xl bg-[#0f0f14] border border-gray-800 text-sm focus:border-violet-600 outline-none"/>
-
-          <button onClick={cek} disabled={loading} className="w-full mt-5 bg-gradient-to-r from-violet-600 to-indigo-600 p-3.5 rounded-xl font-black text-sm tracking-widest">
+          <input value={email} onChange={e=>setEmail(e.target.value)} placeholder="target@gmail.com" className="w-full mt-1 p-3 rounded-xl bg-[#0f0f14] border border-gray-800 text-sm"/>
+          <button onClick={cek} disabled={loading} className="w-full mt-5 bg-gradient-to-r from-violet-600 to-indigo-600 p-3.5 rounded-xl font-black text-sm">
             {loading ? 'CHECKING...' : 'CHECK - POTONG 80'}
           </button>
-          <p className="text-center text-[10px] text-gray-500 mt-2">Biaya 80 perak / cek • Hasil Real API</p>
         </div>
 
-        {/* Hasil */}
         {hasil && (
-          <div className="bg-[#16161f] border border-violet-900/30 rounded-2xl p-4 mt-4">
-            {hasil.error ? (
-              <p className="text-red-400 text-sm">{hasil.error} - Saldo: {hasil.saldo || 0}</p>
-            ) : (
-              <>
-                <div className="flex justify-between text-xs">
-                  <span className="text-gray-400">{hasil.email}</span>
-                  <span className={`font-bold ${hasil.hasil==='live'?'text-green-400':'text-red-400'}`}>{hasil.hasil.toUpperCase()}</span>
-                </div>
-                <div className="text-[11px] text-gray-500 mt-2">Sisa Saldo: Rp {hasil.sisa_saldo}</div>
-              </>
-            )}
+          <div className="bg-[#16161f] border border-violet-900/30 rounded-2xl p-4 mt-4 text-sm">
+            <pre className="text-xs whitespace-pre-wrap">{JSON.stringify(hasil, null, 2)}</pre>
           </div>
         )}
 
-        {/* QRIS preview */}
-        <div className="mt-4 rounded-2xl overflow-hidden border border-gray-800">
-          import QrisRyzz from '../components/QrisRyzz'
-// ...
-<QrisRyzz />" className="w-full"/>
+        <div className="mt-4">
+          <QrisRyzz />
         </div>
+
       </div>
     </div>
   )
-}
+    }
