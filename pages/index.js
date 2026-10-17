@@ -61,7 +61,9 @@ export default function Home(){
 
         {/* QRIS preview */}
         <div className="mt-4 rounded-2xl overflow-hidden border border-gray-800">
-          <img src="/qris.jpg" className="w-full"/>
+          import QrisRyzz from '../components/QrisRyzz'
+// ...
+<QrisRyzz />" className="w-full"/>
         </div>
       </div>
     </div>
